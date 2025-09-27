@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>لعبة الوضع البشري — المرحلة 1</title>
+  <style>
+    body{font-family:sans-serif;background:#111;color:#eee;padding:20px}
+    .choice{display:block;margin:8px 0;padding:10px;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer}
+    .choice:hover{background:#555}
+  </style>
+</head>
+<body>
+  <h1>لعبة: الوضع البشري — المرحلة الأولى</h1>
+  <p>مرحبا بك في عالم الوعي واللاوعي.</p>
+  <div id="game"></div>
+<script>
+const game = document.getElementById('game');
+function start(){
+  game.innerHTML = '<p>شبح العادة يواجهك: "ماشي ضروري تفكر، دير بحال الناس"</p>';
+  addChoice('نستعمل الوعي لتجاوز العادة', ()=>winConcept('الوعي'));
+  addChoice('نتبع العادة', ()=>lose()); 
+}
+function addChoice(txt,cb){
+  const b=document.createElement('button');b.textContent=txt;b.className='choice';b.onclick=cb;game.appendChild(b);
+}
+function winConcept(c){
+  game.innerHTML='<p>ربحت المفهوم: '+c+'</p>';
+  addChoice('تواجه وحش الرغبة المكبوتة', ()=>second());
+}
+function second(){
+  game.innerHTML='<p>وحش الرغبة كيقول: "انت مسير بالغرائز"</p>';
+  addChoice('نستعمل نظرية فرويد لاكتشاف اللاوعي', ()=>winBoss());
+  addChoice('نتجاهل', ()=>lose());
+}
+function winBoss(){
+  game.innerHTML='<h2>مبروك 🎉</h2><p>ربحت المفتاح الفضي للمرحلة الثانية!</p>';
+}
+function lose(){
+  game.innerHTML='<h2>خسرت 😢</h2><button class="choice" onclick="start()">إعادة المحاولة</button>';
+}
+start();
+</script>
+</body>
+</html>
